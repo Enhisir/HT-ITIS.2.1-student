@@ -7,9 +7,6 @@ public static class Parser
         out CalculatorOperation operation, 
         out double val2)
     {
-        if (args is null) 
-            throw new ArgumentNullException(nameof(args));
-
         if (!IsArgLengthSupported(args)) 
             throw new ArgumentException(
                 "Недостаточно аргументов, их должно быть не менее трех.",
