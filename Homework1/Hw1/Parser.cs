@@ -11,20 +11,13 @@ public static class Parser
             throw new ArgumentException(
                 "Недостаточно аргументов, их должно быть не менее трех.",
                 nameof(args));
-        
-        if (!double.TryParse(args[0], out val1)) 
-            throw new ArgumentException(
-                "Первый операнд не является числом.", 
-                nameof(val1));
 
+        val1 = ParseOperand(args[0]);
+        val2 = ParseOperand(args[2]);
+        
         operation = ParseOperation(args[1]);
         if (operation == CalculatorOperation.Undefined) 
             throw new InvalidOperationException(nameof(operation));
-        
-        if (!double.TryParse(args[2], out val2)) 
-            throw new ArgumentException(
-                "Второй операнд не является числом.", 
-                nameof(val2));
     }
 
     private static bool IsArgLengthSupported(string[] args) => args.Length == 3;
@@ -39,5 +32,13 @@ public static class Parser
             "/" => CalculatorOperation.Divide,
             _ => CalculatorOperation.Undefined
         };
+    }
+
+    private static double ParseOperand(string argValue)
+    {
+        if (!double.TryParse(argValue, out var result)) 
+            throw new ArgumentException("операнд не является числом.");
+
+        return result;
     }
 }
