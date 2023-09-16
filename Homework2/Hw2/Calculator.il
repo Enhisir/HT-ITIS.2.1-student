@@ -8,6 +8,8 @@
         float64 value2
     )
     {
+        .maxstack 3
+    
         ldarg value1
         ldarg value2
         ldarg operation
