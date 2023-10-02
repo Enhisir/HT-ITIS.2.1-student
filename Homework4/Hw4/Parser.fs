@@ -10,11 +10,30 @@ type CalcOptions = {
     operation: CalculatorOperation
 }
 
-let isArgLengthSupported (args : string[]) =
-    NotImplementedException() |> raise
+let isArgLengthSupported (args : string[]) = Array.length args = 3
 
 let parseOperation (arg : string) =
-    NotImplementedException() |> raise
+    match arg with
+    | "+" -> CalculatorOperation.Plus
+    | "-" -> CalculatorOperation.Minus
+    | "*" -> CalculatorOperation.Multiply
+    | "/" -> CalculatorOperation.Divide
+    | _ -> CalculatorOperation.Undefined
+
+let parseDouble (arg: string) =
+    let mutable result = 0.0
+    match Double.TryParse(arg, &result) with
+    | true -> result
+    | false -> ArgumentException() |> raise
+
+type parserResult (arg1, operation, arg2) =
+    member this.arg1 = arg1
+    member this.operation = operation
+    member this.arg2 = arg2
     
 let parseCalcArguments(args : string[]) =
-    NotImplementedException() |> raise
+    match isArgLengthSupported args with
+    | true -> (match parseOperation args[1] with
+              | CalculatorOperation.Undefined -> InvalidOperationException() |> raise
+              | operation -> parserResult(parseDouble args[0], operation, parseDouble args[2]))
+    | false ->  ArgumentException() |> raise
