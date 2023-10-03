@@ -25,15 +25,14 @@ let parseDouble (arg: string) =
     match Double.TryParse(arg, &result) with
     | true -> result
     | false -> ArgumentException() |> raise
-
-type parserResult (arg1, operation, arg2) =
-    member this.arg1 = arg1
-    member this.operation = operation
-    member this.arg2 = arg2
     
 let parseCalcArguments(args : string[]) =
     match isArgLengthSupported args with
-    | true -> (match parseOperation args[1] with
-              | CalculatorOperation.Undefined -> InvalidOperationException() |> raise
-              | operation -> parserResult(parseDouble args[0], operation, parseDouble args[2]))
-    | false ->  ArgumentException() |> raise
+    | true -> match parseOperation args[1] with
+              | CalculatorOperation.Undefined -> ArgumentException() |> raise
+              | operation -> {
+                  arg1 = parseDouble args[0]
+                  arg2 = parseDouble args[2]
+                  operation = operation
+                  }
+    | false -> ArgumentException() |> raise
