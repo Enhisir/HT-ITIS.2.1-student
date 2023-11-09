@@ -12,7 +12,19 @@ public class CalculatorController : Controller
         string operation,
         string val2)
     {
-        throw new NotImplementedException();
+        if (!Parser.TryParseDouble(val1, out var firstOp) || !Parser.TryParseDouble(val2, out var secondOp))
+            return BadRequest(Messages.InvalidNumberMessage);
+        
+        
+        return Parser.ParseOperation(operation) switch {
+            Operation.Plus     => Ok(calculator.Plus(firstOp, secondOp).ToString(CultureInfo.InvariantCulture)),
+            Operation.Minus    => Ok(calculator.Minus(firstOp, secondOp).ToString(CultureInfo.InvariantCulture)),
+            Operation.Multiply => Ok(calculator.Multiply(firstOp, secondOp).ToString(CultureInfo.InvariantCulture)),
+            Operation.Divide   => secondOp == 0 
+                ? BadRequest(Messages.DivisionByZeroMessage) 
+                : Ok(calculator.Divide(firstOp, secondOp).ToString(CultureInfo.InvariantCulture)),
+            _ => BadRequest(Messages.InvalidOperationMessage)
+        };
     }
     
     [ExcludeFromCodeCoverage]
