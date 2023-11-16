@@ -61,9 +61,7 @@ public class ExpressionBuilder
                 } while (i < expression.Length 
                          && (char.IsDigit(expression[i]) || expression[i] == '.'));
                 i--;
-                
-                if (!double.TryParse(builder.ToString(), out var value)) 
-                    throw new Exception(MathErrorMessager.NotNumber);
+                var value = double.Parse(builder.ToString());
         
                 _operandStack.Push(Expression.Constant(value));
                 maybeUnary = false;
