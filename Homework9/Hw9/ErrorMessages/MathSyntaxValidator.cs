@@ -48,9 +48,6 @@ public class MathSyntaxValidator
             }
             else if (element.Equals("("))
             {
-                if (prevType is not (ElementType.Nothing or ElementType.Operation))
-                    throw new Exception(MathErrorMessager.OperationBeforeParenthesisMessage(prevElement));
-                
                 prevType = ElementType.OpeningBracket;
             }
             else if (element.Equals(")"))
