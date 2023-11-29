@@ -17,7 +17,7 @@ public class MathCachedCalculatorService : IMathCalculatorService
 
 	public async Task<CalculationMathExpressionResultDto> CalculateMathExpressionAsync(string? expression)
 	{
-		var dbSet = _dbContext.Set<SolvingExpression>();
+		var dbSet = _dbContext.SolvingExpressions;
 		if (await dbSet.AnyAsync(dto => dto.Expression.Equals(expression)))
 		{
 			var cache = await dbSet
