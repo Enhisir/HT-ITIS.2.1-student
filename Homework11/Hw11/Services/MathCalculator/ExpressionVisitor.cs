@@ -1,6 +1,5 @@
 using System.Linq.Expressions;
 using Hw11.ErrorMessages;
-using Hw11.Exceptions;
 
 namespace Hw11.Services.MathCalculator;
 
