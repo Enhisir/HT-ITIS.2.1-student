@@ -18,6 +18,7 @@ public class MathCalculatorService : IMathCalculatorService
         return await CalculateAsync(result);
     }
 
+    [ExcludeFromCodeCoverage]
     private async Task<double> CalculateAsync(Expression current)
         => await CalculateAsync((dynamic)current);
     

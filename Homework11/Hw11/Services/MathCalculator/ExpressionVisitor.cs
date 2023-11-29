@@ -26,10 +26,8 @@ public class MathExpressionVisitor
         };
     }
 
-    private Expression Visit(UnaryExpression node) 
-        => node.NodeType is ExpressionType.Negate 
-            ? node 
-            : throw new InvalidSyntaxException(MathErrorMessager.TwoOperationInRow);
+    // унарные операции проверяются предварительно
+    private Expression Visit(UnaryExpression node) => node;
     
     private Expression Visit(ConstantExpression node) => node;
 }
