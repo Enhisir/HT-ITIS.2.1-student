@@ -17,12 +17,9 @@ public class MathExpressionVisitor
         
         return node.NodeType switch
         {
-            ExpressionType.Add => node,
-            ExpressionType.Subtract => node,
-            ExpressionType.Multiply => node,
             ExpressionType.Divide when Expression.Lambda<Func<double>>(node.Right).Compile().Invoke() is 0
                 => throw new DivideByZeroException(MathErrorMessager.DivisionByZero),
-            ExpressionType.Divide => node
+            _ => node
         };
     }
 
