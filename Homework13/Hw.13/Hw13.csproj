@@ -12,4 +12,13 @@
       <PackageReference Include="JetBrains.dotMemoryUnit" Version="3.2.20220510" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Reference Include="BenchmarkDotNet">
+        <HintPath>..\..\..\..\..\..\..\home\enhisir\.nuget\packages\benchmarkdotnet\0.13.2\lib\net6.0\BenchmarkDotNet.dll</HintPath>
+      </Reference>
+      <Reference Include="BenchmarkDotNet.Annotations">
+        <HintPath>..\..\..\..\..\..\..\home\enhisir\.nuget\packages\benchmarkdotnet.annotations\0.13.11\lib\netstandard2.0\BenchmarkDotNet.Annotations.dll</HintPath>
+      </Reference>
+    </ItemGroup>
+
 </Project>
